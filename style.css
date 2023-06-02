@@ -1,0 +1,136 @@
+.icon-btn{
+    border: none;
+    background: none;
+    color: #dc3545;
+
+}
+.icon-btn:hover{
+    cursor: pointer;
+}
+.icon-btn1{
+    border: none;
+    background: none;
+    color: #007bff;
+
+}
+.icon-btn1:hover{
+    cursor: pointer;
+}
+#emptyMessage{
+    display: grid;
+    place-items: center;
+    margin-top: 10%;
+    color: #a4a9ad;
+}
+#header1{
+    display: flex;
+    justify-content: space-between;
+    margin: 22px 0 21px 0;
+}
+#result{
+    background-color: #212529;
+    color: #fff;
+    padding: 10px;
+    width: 30%;
+    border-radius: 7px;
+    margin: 5px;
+
+}
+/* New Post Message CSS */
+#toast {
+    visibility: hidden;
+    max-width: 100px;
+    height: 50px;
+    /*margin-left: -125px;*/
+    margin: auto;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+
+    position: fixed;
+    z-index: 1;
+    left: 0;right:0;
+    bottom: 30px;
+    font-size: 17px;
+    white-space: nowrap;
+}
+#toast #img{
+	width: 50px;
+	height: 50px;
+    
+    float: left;
+    
+    padding-top: 16px;
+    padding-bottom: 16px;
+    
+    box-sizing: border-box;
+
+    
+    background-color: #111;
+    color: #fff;
+}
+#toast #desc{
+
+    
+    color: #fff;
+
+    padding: 16px;
+    
+    overflow: hidden;
+	white-space: nowrap;
+}
+
+#toast.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 2s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, expand 0.5s 0.5s,stay 3s 1s, shrink 0.5s 4s, fadeout 0.5s 4.5s;
+}
+
+@-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes expand {
+    from {min-width: 50px} 
+    to {min-width: 550px}
+}
+
+@keyframes expand {
+    from {min-width: 50px}
+    to {min-width: 550px}
+}
+@-webkit-keyframes stay {
+    from {min-width: 550px} 
+    to {min-width: 550px}
+}
+
+@keyframes stay {
+    from {min-width: 550px}
+    to {min-width: 550px}
+}
+@-webkit-keyframes shrink {
+    from {min-width: 550px;} 
+    to {min-width: 50px;}
+}
+
+@keyframes shrink {
+    from {min-width: 550px;} 
+    to {min-width: 50px;}
+}
+
+@-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 60px; opacity: 0;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 60px; opacity: 0;}
+}

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Details</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body onload=" onload()">
+
+
+    <div class="container mx-auto " style="width:80%">
+      <div id="header1">
+        <div>
+          <h1 style="margin-top: 20px;">
+            Office Expense Form 
+            </h1>
+        </div>
+        
+          <div style="margin-top: 36px;">
+            <button type="button" class="btn btn-danger" onclick="openModal()"> Add New Expenses <i class="fa-brands fa-slack fa-spin"></i></button>
+
+          </div>
+      </div>
+        
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Account</th>
+            <th scope="col">Comments</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Type</th>
+            <!-- <th scope="col">Total Amount</th> -->
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody id="Table">
+  </tbody>
+</table>
+
+
+   <div id="result">
+    <h6 id="Total"></h6>
+   </div>
+ <!-- ========================================================================================================================================================== -->   
+<!-- Show a Message to user's if form is Empty start here-->
+      <div id="emptyMessage" style="display: none;">
+  
+        <h1 id="alert"></h1>
+        <lottie-player id="alertPic"src="https://assets4.lottiefiles.com/packages/lf20_0zomy8eb.json" 
+         background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay>
+        </lottie-player>
+      </div>
+ <!-- Show a Message to user's if form is Empty Ends here-->
+
+<!-- ========================================================================================================================================================== -->         
+<!-- Modal Popup Before Delete The Entry Start here -->
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to delete this item?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick = closeModalDel()>
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Once you Delete the entry you will not updated or recover it.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick = closeModalDel()>Close</button>
+        <button type="button" class="btn btn-danger" onclick=" Delete()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Popup Before Delete The Entry Start here -->
+
+<!-- ========================================================================================================================================================== -->    
+<!-- Modal Form for Updated Expense Details Entry Start here -->
+      <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Update Your Entry</h5> 
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group " >
+                  <label for="exampleInputEmail1">Date</label>
+                  <input type="date" class="form-control" id="UpdatedDates" >
+                 
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Account</label>
+                  <select class="form-control" id="Accounts">
+                    <option>Electricity Bill</option>
+                    <option>Internet Bill</option>
+                    <option>Water Filling</option>
+                    <option>Guest Refresment</option>
+                    <option>Meals & Tips</option>
+                    <option>Miscellaneous</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Comments</label>
+                  <input type="text" class="form-control" id="Description" placeholder="Write Comments.....">
+                </div>
+                <!-- <div class="form-group">
+                  <label for="exampleInputPassword1">Account</label>
+                  <input type="number" class="form-control" id="Accounts" placeholder="Choice any Account">
+                </div> -->
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Amount</label>
+                  <input type="number" class="form-control" id="TotalAmount" placeholder="Amount">
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Type</label>
+                  <select class="form-control" id="Types">
+                    <option>Expense</option>
+                    <option>Income</option>
+                   
+                  </select>
+                </div>
+                
+               
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeNSaveModalUpdate()">Update & Close</button>
+              <button type="button" class="btn btn-success" onclick="Updated()">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- Modal Form for Updated Expense Details Entry Start here -->
+<!-- ========================================================================================================================================================== -->
+<!-- Modal Form for Entering New Expense Details Start here -->
+<div class="modal fade" class="modal1" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle2">Enter Expense Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group " >
+            <label>Date</label>
+            <input type="date" class="form-control" id="Date" >
+           
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect2">Account</label>
+            <select class="form-control" id="Account">
+              <option>Electricity Bill</option>
+              <option>Internet Bill</option>
+              <option>Water Filling</option>
+              <option>Guest Refreshment</option>
+              <option>Meals & Tips</option>
+              <option>Miscellaneous</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label >Comments</label>
+            <input type="text" class="form-control" id="Comments" placeholder="Write Comments.....">
+          </div>
+           <div class="form-group">
+            <label >Amount</label>
+            <input type="number" class="form-control" id="Amount" placeholder="Amount">
+          </div>
+          <div class="form-group">
+            <label>Type</label>
+            <select class="form-control" id="Type">
+              <option>Expense</option>
+              <option>Income</option>
+             
+            </select>
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeNSaveModal()">Submit & Close</button>
+        <button type="submit" class="btn btn-primary" onclick="GetData()">Submit</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-backdrop fade show" id="backdrop" style="display: none;"></div>
+<!-- Modal Form for Entering New Expense Details End here -->
+
+
+<div id="toast">
+  <div id="img"><i class="fa-solid fa-thumbs-up fa-bounce"></i></div>
+  <div id="desc">
+    <i class="fa-solid fa-face-smile-beam fa-bounce"></i>
+  </div>
+</div>
+
+
+</div>
+
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" 
+integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" 
+integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
